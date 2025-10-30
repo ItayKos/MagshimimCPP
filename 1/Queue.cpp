@@ -1,0 +1,88 @@
+#include <iostream>
+#include "Queue.h"
+
+void initQueue(Queue* q, unsigned int size)
+{
+    q->queue = new unsigned int[size];
+    q->size = size;
+    q->front = 0;
+    q->rear = 0;
+}
+
+void cleanQueue(Queue* q)
+{
+    delete[] q->queue;
+}
+
+
+void enqueue(Queue* q, unsigned int newValue)
+{
+    unsigned int* newQueueArray = nullptr;
+    int i = 0;
+    if (!isFull(q))
+    {
+        q->queue[q->rear] = newValue;
+        q->rear = (q->rear + 1) % q->size;
+    }
+    else
+    {
+        newQueueArray = new unsigned int[q->size + 1];
+        for (i = 0; i < q->size + 1; i++)
+        {
+            newQueueArray[i] = q->queue[q->rear];
+            if (q->rear - 1 < 0)
+            {
+                q->rear = q->size - 1;
+            }
+            else
+            {
+                q->rear = q->rear - 1;
+            }
+        }
+        q->front = 0;
+        q->rear = i;
+        delete q->queue;
+        q->queue = newQueueArray;
+    }
+}
+
+// return element in top of queue, or -1 if empty
+int dequeue(Queue* q)
+{
+    int tempIndex = 0;
+    if (isEmpty(q))
+    {
+        return -1;
+    }
+    else
+    {
+        tempIndex = (int)q->front;
+        q->front = (q->front + 1) % q->size;
+        return q->queue[tempIndex];
+    }
+}
+
+
+bool isEmpty(Queue* s)
+{
+    if (s->front == s->rear)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool isFull(Queue* s)
+{
+    if ((s->rear + 1) % s->size == s->front)
+    {
+        return true;
+    }
+    else
+    {
+        false;
+    }
+}
