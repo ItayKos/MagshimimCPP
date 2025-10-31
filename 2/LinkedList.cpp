@@ -19,9 +19,9 @@ void addToList(List** head, unsigned int newValue)
 
 void removeFromList(List** head)
 {
+    List* tempNode = nullptr;
     if (*head != nullptr)
     {
-        List* tempNode = nullptr;
         tempNode = *head;
         *head = tempNode->next;
         delete tempNode;

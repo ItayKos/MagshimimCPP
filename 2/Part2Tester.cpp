@@ -2,7 +2,7 @@
 #include "Utils.h"
 #include <windows.h> // WinApi header - needed for setting console color
 
-#include <iostream>'
+#include <iostream>
 #include <sstream>
 #include <cstdlib>
 

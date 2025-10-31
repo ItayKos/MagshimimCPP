@@ -6,7 +6,9 @@
 /* a positive-integer value stack, with no size limit */
 typedef struct Stack
 {
-	// Complete Definition here
+	List* stack;
+	unsigned int size;
+	unsigned int elements;
 } Stack;
 
 void push(Stack* s, unsigned int element);
