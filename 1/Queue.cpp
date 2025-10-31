@@ -30,7 +30,7 @@ void enqueue(Queue* q, unsigned int newValue)
         for (i = 0; i < q->size + 1; i++)
         {
             newQueueArray[i] = q->queue[q->rear];
-            if (q->rear - 1 < 0)
+            if (((int)q->rear) - 1 < 0)
             {
                 q->rear = q->size - 1;
             }
@@ -83,6 +83,6 @@ bool isFull(Queue* s)
     }
     else
     {
-        false;
+        return false;
     }
 }
