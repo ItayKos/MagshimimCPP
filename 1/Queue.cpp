@@ -18,35 +18,12 @@ void cleanQueue(Queue* q)
 
 void enqueue(Queue* q, unsigned int newValue)
 {
-    unsigned int* newQueueArray = nullptr;
-    int i = 0;
     if (!isFull(q))
     {
         q->queue[q->rear] = newValue;
         q->rear = (q->rear + 1) % q->size;
+        q->length = (q->length + 1);
     }
-    else
-    {
-        newQueueArray = new unsigned int[q->size + 1];
-        for (i = 0; i < q->size + 1; i++)
-        {
-            newQueueArray[i] = q->queue[q->rear];
-            if (((int)q->rear) - 1 < 0)
-            {
-                q->rear = q->size - 1;
-            }
-            else
-            {
-                q->rear = q->rear - 1;
-            }
-        }
-        q->front = 0;
-        q->rear = i - 1;
-        q->size = q->size + 1;
-        delete q->queue;
-        q->queue = newQueueArray;
-    }
-    q->length = (q->length + 1);
 }
 
 // return element in top of queue, or -1 if empty
