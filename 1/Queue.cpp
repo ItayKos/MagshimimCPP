@@ -5,6 +5,7 @@ void initQueue(Queue* q, unsigned int size)
 {
     q->queue = new unsigned int[size];
     q->size = size;
+    q->length = 0;
     q->front = 0;
     q->rear = 0;
 }
@@ -40,10 +41,12 @@ void enqueue(Queue* q, unsigned int newValue)
             }
         }
         q->front = 0;
-        q->rear = i;
+        q->rear = i - 1;
+        q->size = q->size + 1;
         delete q->queue;
         q->queue = newQueueArray;
     }
+    q->length = (q->length + 1);
 }
 
 // return element in top of queue, or -1 if empty
@@ -56,16 +59,17 @@ int dequeue(Queue* q)
     }
     else
     {
+        q->length = q->length - 1;
         tempIndex = (int)q->front;
         q->front = (q->front + 1) % q->size;
-        return q->queue[tempIndex];
+        return (int)q->queue[tempIndex];
     }
 }
 
 
 bool isEmpty(Queue* s)
 {
-    if (s->front == s->rear)
+    if (s->length == 0)
     {
         return true;
     }
@@ -77,7 +81,7 @@ bool isEmpty(Queue* s)
 
 bool isFull(Queue* s)
 {
-    if ((s->rear + 1) % s->size == s->front)
+    if (s->length == s->size)
     {
         return true;
     }

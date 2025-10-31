@@ -7,6 +7,7 @@ typedef struct Queue
 {
 	unsigned int* queue;
 	unsigned int size;
+	unsigned int length;
 	unsigned int front;
 	unsigned int rear;
 } Queue;
